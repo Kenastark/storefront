@@ -1,0 +1,48 @@
+pipenv is a depency mangement tool for install our appliacation depencies in virtual environment. This way our app dependency will not clash with other app dependency.
+
+    pipenv install django 
+    installs django inside a virtual environment
+
+    Pipfile - is like package.json for javascript projects
+
+    pipenv shell
+    activate the virtual environbment to use the python interpreter insde the venv not the one thatis installed gloabally on this machine
+
+    django-admin
+    it is a utility that comes with django
+
+storefront directory is the core of our appliacation
+__init__.py defines the directory as a package
+settings.py where we define our application setting
+urls.py we define url of our apps
+asgi.py and wsgi.py are used for deployment
+manage.py is a wrapper around django admin. It takes the settings of the project into account.
+
+    python manage.py runserver 9000
+    to start your webserver. 9000 is the port number, default is 8000
+
+    pipenv --venv
+    This gives us the path to out python interpreter existing in the virtual environbment created with pipenv
+
+The setting.py module contains a lot of settings.Every Django project by default include these apps:
+
+django.contrib.admin
+gives us an admin interface for managing our data
+
+django.contrib.auth
+used for authenticating user
+
+django.contrib.contenttypes
+talk about later
+
+django.contrib.sessions
+kind of legacy. A session is a temporary memory on a server for managing users data. These days, When building APIs with django, we dont use the sessions app
+
+django.contrib.messages
+Used for displaying one-time notification to the user
+
+django.contrib.staticfiles
+Used for serving static files eg imagines, csv files
+
+
+
