@@ -30,7 +30,7 @@ function HomeNav() {
                     <p>Account</p>
                     <FontAwesomeIcon icon={faCaretDown}/>
                   </div>
-                <div className={styles.auth__btn__container}>
+                <div className={styles.dropdown}>
                     <Link href={`/login`}>Login</Link>
                     <Link href={`/signUp`}>SignUp</Link>
                   </div>

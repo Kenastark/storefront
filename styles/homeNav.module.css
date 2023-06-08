@@ -55,12 +55,10 @@
     cursor: pointer;
     transition: all 250ms ease-in-out;
 }
-.auth__btn__container{
+.dropdown{
     display: none;
-    
-   
 }
-.acct__container:hover .auth__btn__container{
+.acct__container:hover .dropdown{
     display: flex;
     flex-direction: column;
     gap: 10px;
