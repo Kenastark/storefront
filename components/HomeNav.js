@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import styles from "../styles/homeNav.module.css"
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCaretDown, faTimes, faUser } from '@fortawesome/free-solid-svg-icons'
 function HomeNav() {
     const [active,setActive] = useState(false)
     const handleToggle =  ()=>{
         setActive(!active)
       }
+ 
+   
   return (
     <header className={styles.nav__header}>
        <div className={styles.nav__container}>
@@ -22,8 +24,22 @@ function HomeNav() {
                 <ul>
                 <li><Link href={`/link1`}>Link1</Link></li>
                 <li><Link href={`/link2`}>Link2</Link></li>
-                <li><Link href={`/link3`}>Link3</Link></li>
-                <li><Link href={`/link4`}>Link4</Link></li>
+                <li className={styles.acct__container}>
+                  <div className={styles.account}>
+                    <FontAwesomeIcon icon={faUser}/>
+                    <p>Account</p>
+                    <FontAwesomeIcon icon={faCaretDown}/>
+                  </div>
+                <div className={styles.auth__btn__container}>
+                    <Link href={`/login`}>Login</Link>
+                    <Link href={`/signUp`}>SignUp</Link>
+                  </div>
+                </li>
+               <li>
+                <button>
+                  Lorem
+                </button>
+               </li>
                 </ul>
             </nav>
        </div>

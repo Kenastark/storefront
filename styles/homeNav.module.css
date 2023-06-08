@@ -9,7 +9,7 @@
     padding: 10px 10px;
     min-height: 6rem;
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 10px -1px rgba(0,0,0,.25);
+    box-shadow: var(--box-shadow);
     z-index: 100;
 }
 .nav__container{
@@ -30,14 +30,69 @@
     /* right: 0; */
     z-index: 100;
 }
+
 .nav__container .nav__elements ul{
     display: flex;
-    gap: 10px;
+    gap: 25px;
     list-style: none;
+    color: var(--primary-color-accent);
+    font-size: 1.2rem;
+    align-items: center;
 }
+
 .nav__container .nav__elements ul a{
     text-decoration: none;
+    color: var(--primary-color-accent);
+    transition: all 250ms ease-in-out;
 }
+.acct__container{
+    position: relative;
+}
+.account{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
+}
+.auth__btn__container{
+    display: none;
+    
+   
+}
+.acct__container:hover .auth__btn__container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1rem;
+    position: absolute;
+    top: 25px;
+    padding: 1rem;
+    box-shadow: var(--box-shadow);
+    z-index: 20;
+    background-color: #fff;
+}
+.nav__container .nav__elements ul li button{
+    background-color: var(--primary-color-accent);
+    padding: 1rem 2.5rem;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
+}
+
+.nav__container .nav__elements ul a:hover{
+    color: var(--primary-color);
+}
+.nav__container .nav__elements ul li .account:hover{
+    color: var(--primary-color);
+}
+.nav__container .nav__elements ul li button:hover{
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
 
 @media (max-width:700px){
     .nav__container .toggle__btn{
@@ -59,16 +114,23 @@
     }
     .nav__elements.active{
         /* width: 100%; */
-        height: 50vh;
-       
-        box-shadow: 0px 4px 12px -1px rgba(0,0,0,.25);
+        height: 40vh;
+        box-shadow: var(--box-shadow);
     }
     .nav__elements ul{
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        
         list-style: none;
         margin-top: 20px;
         padding: 10px;
+    }
+    .nav__container .nav__elements ul li button{
+        background-color: var(--primary-color);
+        color: #fff;
+    }
+    .nav__container .nav__elements ul li button:hover{
+        background-color: #ebbdf0;
     }
 }
