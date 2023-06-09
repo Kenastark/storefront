@@ -1,0 +1,25 @@
+.layout_container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.layout_container main{
+    flex: 1;
+}
+
+.navigate__up{
+    position: fixed;
+    bottom: 8%;
+    z-index: 10;
+    padding: 20px;
+    background-color: var(--primary-color);
+    color: var(--bg-1);
+    right: 5%;
+    border-radius: 50%;
+    scroll-behavior: smooth;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+}
+.navigate__up svg{
+    font-size: 1.3rem;
+}

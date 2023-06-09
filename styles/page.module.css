@@ -1,9 +1,130 @@
-.home__container{
+.intro{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  min-height: 100vh;
+
+}
+.intro .overlay{
+  position: relative;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
+}
+.overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.overlay img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+.main_intro{
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-1);
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
 }
 
-.main{
-  flex: 1;
+.fading_text {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  /* margin: 0; */
+  font-size: 10rem;
+  letter-spacing: 10px;
+  opacity: 0.05;
+  top: 10%;
+  font-weight: 600;
+}
+.main_org{
+  margin-top:-8px ;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.main_org h1{
+  font-size: 4.3rem;
+  color: var(--text-color-dark-bg);
+  text-transform: uppercase;
+}
+.main_org .underline{
+  color: var(--primary-color);
+  display: flex;
+  /* align-items: center; */
+  /* row-gap: 20px; */
+}
+/* .main_org .underline span{
+  font-size: 1rem;
+}
+.main_org .underline::after{
+  content: '';
+  position: absolute;
+  height: 4px;
+  width: 6rem; 
+  background-color: var(--primary-color); 
+  border-radius: 2px;
+} */
+
+.main_org p{
+  color: var(--text-color-footer-quick-links);
+  max-width: 80%;
+  font-size: 1.1rem;
+  line-height: 25px;
+  /* height: fit-content; */
+  /* box-sizing: border-box; */
+}
+
+.main_org a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1.2rem 1.5rem;
+  background-color: var(--primary-color);
+  color: var(--bg-1);
+  font-size: 1rem;
+  border-radius: 10px;
+  /* box-sizing: border-box; */
+  width: fit-content;
+  
+
+  text-decoration: none;
+}
+
+@media (max-width:700px){
+  .intro{
+    grid-template-columns: 1fr;
+    min-height: 90vh;
+  }
+  .intro .overlay{
+    display: none;
+  }
+  .fading_text{
+    font-size: 6rem;
+    top: 4%;
+  }
+  .main_org{
+    margin-top: -35px;
+    align-items: center;
+  }
+  .main_org h1{
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .main_org p{
+    text-align: center;
+    max-width: 90%;
+  }
 }

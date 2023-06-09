@@ -9,8 +9,6 @@ function HomeNav() {
     const handleToggle =  ()=>{
         setActive(!active)
       }
- 
-   
   return (
     <header className={styles.nav__header}>
        <div className={styles.nav__container}>
@@ -18,12 +16,13 @@ function HomeNav() {
             <h1>LinkWork</h1>
         </div>
         <div className={styles.toggle__btn} onClick={handleToggle}>
-        <FontAwesomeIcon icon={active?faTimes:faBars}/>
+        <FontAwesomeIcon icon={active?faTimes:faBars} />
         </div>
         <nav className={`${styles.nav__elements} ${active&&styles.active}`}>
                 <ul>
-                <li><Link href={`/link1`}>Link1</Link></li>
-                <li><Link href={`/link2`}>Link2</Link></li>
+                <li><Link href={`/about`}>About us</Link></li>
+                <li><Link href={`/services`}>Services</Link></li>
+                <li><Link href={`/contact`}>Contact us</Link></li>
                 <li className={styles.acct__container}>
                   <div className={styles.account}>
                     <FontAwesomeIcon icon={faUser}/>
@@ -35,11 +34,11 @@ function HomeNav() {
                     <Link href={`/signUp`}>SignUp</Link>
                   </div>
                 </li>
-               <li>
+               {/* <li>
                 <button>
                   Lorem
                 </button>
-               </li>
+               </li> */}
                 </ul>
             </nav>
        </div>
