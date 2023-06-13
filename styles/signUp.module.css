@@ -1,0 +1,30 @@
+.signUp__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.tabs{
+    display: flex;
+    flex-direction: column;
+    padding: 1.3rem 2rem;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+    gap: 15px;
+}
+
+:is(.recruiter,.seeker){
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+:is(.recruiter,.seeker) a{
+    text-decoration: none;
+    color: var(--bg-1);
+    font-size: 1.2rem;
+}
+:is(.recruiter,.seeker) svg{
+    color: var(--primary-color);
+}
