@@ -1,21 +1,25 @@
 "use client"
+import { useState } from 'react'
 import styles from '../../../styles/recruiter.module.css'
 import { useFormik } from 'formik'
 import { signUpValidation } from '@/lib/validation'
-function Form() {
+
+function SeekerForm() {
     const initialValues = {
         firstname:"",
         lastname:"",
-        organization:"",
+        username:"",
         email:"",
         password:"",
-        industry:"",
+        DOB:"",
+        COS:""
     }
     const formik = useFormik({
         initialValues,
         // need to add the onSubmit function here, waiting for API(backend) endpoints
         validate:signUpValidation,
       })
+      console.log(formik.values.username);
   return (
     <form
     className={styles.form}
@@ -61,42 +65,37 @@ function Form() {
    
     </div>
     <div className={styles.email__phone}>
-      <label htmlFor='organization'>Organization</label>
+      <label htmlFor='username'>Username</label>
       <input
         type='text'
-        name='organization'
-        id='organization'
+        name='username'
+        id='username'
         className={
-            formik.errors.organization&&formik.touched.organization?styles.invalid:styles.input
+            formik.errors?.username&&formik.touched?.username?styles.invalid:styles.input
         }
-        {...formik.getFieldProps('organization')}
+        {...formik.getFieldProps('username')}
         required
       />
     
     </div>
     <div className={styles.email__phone}>
-      <label htmlFor='phone'>Phone Number</label>
+      <label htmlFor='DOB'>Date of Birth</label>
       <input
-        type='text'
-        name='phone'
-        id='phone'
+        type='date'
+        name='DOB'
+        id='DOB'
         className={
-            formik.errors.phone&&formik.touched.phone?styles.invalid:styles.input
+            formik.errors?.DOB&&formik.touched?.DOB?styles.invalid:styles.input
         }
-        {...formik.getFieldProps('phone')}
+        {...formik.getFieldProps('DOB')}
       />
      
     </div>
     <div className={styles.email__phone}>
-     <select name="industry"  id="industry" {...formik.getFieldProps('industry')} className={formik.errors.industry&&formik.touched.industry?styles.invalid:styles.input} required>
-      <option value="Finance">Finance</option>
-      <option value='agriculture'>Agriculture</option>
-      <option value="engineering">Engineering</option>
-      <option value="IT">Information & Technology</option>
-      <option value="oil&gas">Oil & Gas</option>
-      <option value="healthcare">Healthcare</option>
-     </select>
-     
+     <label htmlFor="COS">Course of Study</label>
+        <input type="text" className={
+            formik.errors?.COS&&formik.touched?.COS?styles.invalid:styles.input
+          } name='COS' {...formik.getFieldProps('COS')}  />
     </div>
     <div className={styles.password}>
       <label>Password (6 or more characters)</label>
@@ -138,4 +137,4 @@ function Form() {
   )
 }
 
-export default Form
+export default SeekerForm

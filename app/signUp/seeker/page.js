@@ -1,20 +1,20 @@
 import Link from 'next/link'
 import styles from '../../../styles/recruiter.module.css'
-import Form from './form'
+import SeekerForm from './SeekerForm'
 
-function RecruiterPage() {
+function SeekerPage() {
    
-  return (
+ return (
     <div className={styles.signUpScreen}>
     <header>
       <Link href='/'>
         LinkWork
       </Link>
     </header>
-    <h1>Build Yor Dream Team</h1>
+    <h1>Join Thousands of Amazing Companies</h1>
     {/* {verificationMessage&&<p className={styles.verification}>{verificationMessage}</p>}
     {errorMessage&&<p className={styles.errorMessage}>{error_holder}</p>} */}
-   <Form/>
+   <SeekerForm/>
     <p className={styles.signIn}>
       Already on LinkWork? <Link href='/login'>Sign in</Link>
     </p>
@@ -23,4 +23,4 @@ function RecruiterPage() {
   )
 }
 
-export default RecruiterPage
+export default SeekerPage
