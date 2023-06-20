@@ -3,7 +3,7 @@ from .models import User
 from django.http import HttpRequest
 from django.http import HttpResponse
 
-def register(request):
+def registery(request):
     if request.method == 'POST':
         username = request.POST['username']
         email = request.POST['email']
