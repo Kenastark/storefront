@@ -1,4 +1,5 @@
 "use client"
+import axios from 'axios';
 import { useState } from 'react'
 import styles from '../../../styles/recruiter.module.css'
 import { useFormik } from 'formik'
@@ -13,16 +14,27 @@ function SeekerForm() {
         password:"",
         DOB:"",
         COS:""
-    }
+    };
     const formik = useFormik({
         initialValues,
         // need to add the onSubmit function here, waiting for API(backend) endpoints
+        onSubmit: async (values) => {
+          try {
+            const response = await axios.post('/api/register', values);
+            console.log(response.data); // Handle the response as needed
+          } catch (error) {
+            console.error(error);
+          }
+        },
         validate:signUpValidation,
       })
       console.log(formik.values.username);
   return (
     <form
     className={styles.form}
+    method="post" 
+    action="{% url 'register' %}"
+    onSubmit={formik.handleSubmit}
    >
     <div className={styles.email__phone}>
       <label htmlFor='firstname'>Firstname</label>
@@ -131,7 +143,7 @@ function SeekerForm() {
       styles.signUpBtn
       }
     >
-      Agree & Join
+      Register
     </button>
   </form>
   )
