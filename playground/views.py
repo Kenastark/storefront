@@ -1,6 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+
+def calculate():
+   x = 1
+   y = 2
+   return x
+
 # Create your views here.
-def say_hello(resquest):
-    return HttpResponse('Hello Kena is king')
+def say_hello(request):
+   # return HttpResponse('Hello Kena is king')
+   x = calculate()
+   return render(request, 'hello.html', {'name': 'kenastark'}) 

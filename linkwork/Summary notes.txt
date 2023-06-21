@@ -1,0 +1,93 @@
+Django is a free and open-source framework for building web applications with python.
+Frameworks:
+1.	Django
+2.	Flask
+3.	Tornado
+4.	Bottle
+5.	Flacon
+6.	Hug
+ 
+Companies like Youtube, Instagram, Spotify and Dropbox use Django
+
+FEATURES OF DJANGO
+1.	The admin site: an admin interface for managing our data
+2.	Object relational mapper (ORM); that abstract the database so we can query or persists data without writing a lot of SQL code
+3.	Authentication package: for identifying users.
+4.	Caching data
+
+Points to consider when choosing a framework.
+i.	Maturity
+ii.	Stable
+iii.	Difficulty Learning curve.
+iv.	Community
+
+Pipenv: is a dependency management tool for installing our application dependencies in virtual environments. This way our app dependency will not clash with other applications dependency.
+
+Pipfile is similar to package.json for javascript project
+
+Run `pipenv shell` to activate the virtual environment
+
+`django-admin` is a utility that comes with Django
+
+`Django-admin startproject <project-name> .` . The period(.) tells Django to use the current directory as the project directory. The directory created is the core of our application. In the directory, we have:
+1.	__init__.py which defines this directory as a package.
+2.	Asgi.py used for deployment
+3.	Settings.py where we define our application setting
+4.	Urls.py where we define urls for our application
+5.	Wsgi.py used for deployment.
+6.	Manage.py this is a wrapper around Django-admin. It takes the settings for this project into account. It is used now that we have a project
+
+`python manage.py runserver <port-number>`. The default port is 8000
+
+` pipenv –venv` to find the path to our virtual environment
+
+7 – Creating Your First App
+Every Django project is a collection of various apps each providing a certain functionality. 
+
+Every Django project has these apps by default:
+    'django.contrib.admin' – gives as an admin interface for managing our data
+    'django.contrib.auth'	-  used for authenticating users
+    'django.contrib.contenttypes'	 - later
+    'django.contrib.sessions' -  legacy not used anymore. A session is a temporary memory on a server for managing users data
+        'django.contrib.messages'  -  used for displaying one time notification to the user.
+        'django.contrib.staticfiles' – for serving statis files eg images, CSS, etc
+ 
+`python manage.py startapp <app-name>` to create a new Django app. Each app has the same folder structure.
+i.	Migrations folder: for generating database tables
+ii.	Admin: where we define how the admin interface for the app is going to look like
+iii.	Apps: where we configure the app
+iv.	Models: where we define the model classes for the app. We use model classes to pull out data from the database and present to the user.
+v.	Tests: where we write our unit tests
+vi.	Views: a request handler
+
+Everytime you create an app in Django, you need to register it under INSTALLED_APPS in settings.py
+
+8 – Writing Views
+
+A view function is a function that takes a request and return a response. It is a request handler. It is called ‘action’ in other frameworks. We define our views function in views.py under our app.
+
+You map views to URL so when we get a request at that URL, the function is called.
+
+9 – Mapping URLs to Views
+
+Any url starting with 'playgound/' will be routed to the urls conf module in the playground app as shown in the include() function
+   urlpatterns = [
+ path('playground/', include('playground.urls'))
+]
+
+
+10 - Using Templates 
+
+Use template to return HTML content to the client
+
+12 - Using Django Debug Toolbar
+
+We use middleware to hook into django's request response processing
+
+BUILDING A DATA Models
+Models are used to store and retrieve data
+
+Association class: represents the relationship between two entities.
+
+
+
