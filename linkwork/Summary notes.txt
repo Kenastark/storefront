@@ -89,5 +89,70 @@ Models are used to store and retrieve data
 
 Association class: represents the relationship between two entities.
 
+You create apps in Django that serves a specific functionality or represents a distinct feature of the application. An app is designed to be reusable and can be plugged into multiple Django projects. 
+
+An app refers to a self-contained module or component of a Django project.
+
+7 -Defining One-to-One relationship
+
+on_delete=models.CASCADE - means if parent is deleted, the child is also deleted
+
+on_delete=models.SET_NULL - when parent is deleted, the child is not deleted. Parent record will be set to NULL
+
+on_delete=models.SET_DEFAULT - this field will be set ot default value
+
+on_delete=models.PROTECT - To prevent deletion. If child is present, parent cannot be deleted. You must to first delete the child before deleting the parent.
+
+8 - One-to-Many 
+
+Use customer = models.ForeignKey(<class-name>, on_delete=models.PROTECT) to define a one to many relation. With the <class-name> referencing the Parent class(Primary Key)
+
+9 - Defining a Many-to-Many relationship
+We can define the relationship in either of these classes and Django automatically create the reverse relationship.
+
+We define the relationship in the Product class because we might have a product we are showing to the user and at the same time, we want to show all the promotions that apply to that product. Django automatically create the reverse relationship 
+      promotions = models.ManyToManyField(Promotion, related_name='products')
+    related_name will be used in the Promotion class to create a field that returns all the product that a particular promotion is applied to (default was 'product_set')
+
+10 - Resolving Circular Relationships
+
+Circular dependency is something to avoid. It happens when two classes depend on each other at the same time.
+
+Use related_name='+' to tell Django not the create the reverse relationship
+
+
+11 - Generic Relationships
+
+To identify any object in your application in a generic way, you need two pieces of information:
+  1. Type (product, video, article)...we can find the table
+  2. ID....we cna find the record
+
+  in database terms, you can identify any record in any table using the above
+
+ ContentType is an abstract model which comes with django. Using ContentType, we can create generic relationships within our models. It is used to identify the type of an object
+
+ContentType is a model that represents the type of an object in our application. It is a model like any model in our application but it is specifically made for allowing generic relationships.
+
+Use GenericForeignKey() with <content_object> to get the actual object that the tag is applied to that is, the actual product.
+
+To define a generic relationship, they are three things we need to define:
+  1. content_type
+  2. object_id
+  3. content_object
+
+  auth is an app automatically installed in every Django project. We use it to authenticate and authorize users
+
+
+SETTING UP THE DATABASE
+
+
+
+
+
+
+
+
+
+
 
 
