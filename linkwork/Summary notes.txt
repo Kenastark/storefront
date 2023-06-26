@@ -185,8 +185,16 @@ django_migrations_migrations
                     python manage.py sqlmigrate store 0003
             the sql code generated is depended on the database backend we use
   
+5 - Customizing Database Schema
+
+Defining metadata in a class is used to gain more control over your database Schema.
+        class Meta:
+    Is where we define meta data about this model
+
+Indexes are used to speed up our queries
 
 
+6 - Reverting Migrations
 
-
-
+the proper way to remove migrations is to delete the code in our updated codebase and associated migration file or else the next time we create a migration, django will create a new migration fro applying the changes  to our database with the undeleted code
+          git log --oneline
