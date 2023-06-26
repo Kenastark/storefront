@@ -145,12 +145,46 @@ To define a generic relationship, they are three things we need to define:
 
 SETTING UP THE DATABASE
 
+Django supports the following DBMS:
+  1. SQLite - Light weight db engine used for development and low traffic website
+  2. PostgreSQL - for serious projects..most common
+  3. MySQL - for serious projects..most common
+  4. MariaDB - for serious projects
+  5. Oracle - for serious projects officially supported by Django
+  6. Microsoft SQL
 
+3 - Creating Migrations
 
+We use Migrations to create or update database tables based off our models we have in our project.
+    python manage.py makemigrations....
+    run this commandto generate a new migration
 
+    cmd + T is the "go to symbol" command
+Slugs are used for SEO (Search Engine Optimization). Use models.SlugField(default='-') to set a default value or use null=True for your slug because slug cannot be null. You can also set null=True.
 
+The main reason for adding a slug, is to make is to make it easy fro search engines to find our content. It is a SEO technique
 
+4 - Running Migrations
 
+Each migrations describes a set of changes. Each migration is like a commit in a Version Control System (VCS).
+
+Sqlite is a very lightweight database used for development purposes or very small websites
+
+tables under the auth app under SQLITE EXPLORER. they are used for authenticatng and authorising users.
+
+The django_migration table keep track of the migrations that have been applied this database 
+                    python manage.py migrate
+         is used to run migrations
+
+django_admin_log
+django_content_type
+django_migrations_migrations
+                        python manage.py sqlmigrate
+    with this we can see the SQL code that is sent to our database at runtime. add 'store 0003' to see the SQL code for the third migration in the store app. '0003' is the sequence number for the migration file. Shown below
+
+                    python manage.py sqlmigrate store 0003
+            the sql code generated is depended on the database backend we use
+  
 
 
 
