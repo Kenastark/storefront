@@ -198,3 +198,27 @@ Indexes are used to speed up our queries
 
 the proper way to remove migrations is to delete the code in our updated codebase and associated migration file or else the next time we create a migration, django will create a new migration fro applying the changes  to our database with the undeleted code
           git log --oneline
+
+7 - 8 had no signifant note
+
+9 - Using MySQL in Django
+
+MySQL Client is a package that you must install to connect your django project to MySQL
+
+            pipenv install mysqlclient..is used to install mysql client. Installing this package allows us to change the engine under DATABASES (in settings.py) to 'backends.mysql'
+
+            mysql -u root -p...to test your installation of MySQL if it is correct
+
+            ctrl + D to escape/quit
+
+            Shift + cmd + O..is used to open symbols(variables, classes, functions) editor
+
+
+
+
+
+
+
+
+
+
