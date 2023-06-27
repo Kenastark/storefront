@@ -233,6 +233,36 @@ Create an empty migration and wrtie your SQL code to gain full control over gene
 mockaroo.com is used to generate dummy data
 
 
+DJANGO ORM
+
+Use Django object relational mapper (ORM) to query and manupulate data 
+
+
+2 - Django ORM
+
+An ORM maps objects to relational records and it frees use from writing a lot of repetitive code.
+
+ORMs help to:
+1. Reduce complexity in code
+2. Make the code more understandable
+3. Help us get more done in less time
+
+
+Migrations are part of django ORM.
+models.Model are part of django ORM.
+
+ORMs do not work well when dealing with complex queries
+
+
+
+
+
+
+
+
+
+
+
 
 
 
