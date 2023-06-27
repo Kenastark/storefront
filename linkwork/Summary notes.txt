@@ -255,11 +255,29 @@ ORMs do not work well when dealing with complex queries
 
 
 
+4 - Mangers and QuerySets
 
+Every model in django has an attribute called Objects, this returns a manager object.
 
+A manager is an interface to the database. Like a remote control with buttons we can use to talk to our database.
 
+We have a bunch of methods for querying or updating data:
 
+    Product.object.all()..for pulling up all the objects in the product table
+    Product.object.get()..for getting a singular object
+    Product.object.filter()..for filtering data
+    Product.object.all()
+  most methods return a QuerySets. Count() methods returns result immediately
 
+A QuerySets is an object that encapsulates a query. It heppens under the following scenarious:
+i. when we iterate over a query set.
+ii. when we convert it to a list
+iii. when we access an individual element or when we slice it.
+
+QuerySets are lazy, meaning they evaluate at a later point.
+
+We can use QuerySets methods to build complex queries. Chaining methods together is how you build a new QuerySets
+eg    query_set.filter().filter().order_by()
 
 
 
