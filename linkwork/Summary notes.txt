@@ -142,6 +142,9 @@ To define a generic relationship, they are three things we need to define:
 
   auth is an app automatically installed in every Django project. We use it to authenticate and authorize users
 
+Model Field Reference
+https://docs.djangoproject.com/en/4.2/ref/models/fields/
+
 
 SETTING UP THE DATABASE
 
@@ -156,7 +159,7 @@ Django supports the following DBMS:
 3 - Creating Migrations
 
 We use Migrations to create or update database tables based off our models we have in our project.
-    python manage.py makemigrations....
+          python manage.py makemigrations
     run this commandto generate a new migration
 
     cmd + T is the "go to symbol" command
@@ -196,6 +199,8 @@ Defining metadata in a class is used to gain more control over your database Sch
 
 Indexes are used to speed up our queries
 
+Model Meta Options
+https://docs.djangoproject.com/en/4.2/ref/models/options/
 
 6 - Reverting Migrations
 
@@ -288,5 +293,74 @@ eg get(pk=1). The get() method returns an acutal object because nothing else wil
 .exist()..checks the existence of an object. returns a boolean value 
 
 6 - Filtering Objects 
+
+You cannot use logical operators within .filter() because it returns a boolean value. Instead, you use a keyword argument
+eg    unit_price__gt - greater than
+      unit_price__gte - greater than or equal to
+      unit_price__lt - less than
+      unit_price__lte - less than or equal to
+      https://docs.djangoproject.com/en/4.2/ref/models/querysets/
+
+
+You can filter across relationships by using two underscores as shown:
+    .filter(collection__id__range=(1,2,3)) 
+  
+The first `__` helps us to navigate the relationship, we then type any of the attribute or fields of the collection class.
+For example,
+                .filter(collection__id=1)
+
+__range is the lookup type
+
+STRINGS
+title__contains='coffee'
+title__icontains - case insensitive Search
+title__startswith
+title__istartswith='coffee 
+title__endswith
+
+
+DATES
+.filter(last_update__year=2021)
+.filter(last_update__month=6)
+.filter(last_update__day=1)
+.filter(last_update__date='2016-06-02')
+
+.filter(description__isnull=True)
+
+EXERCISES
+Filtering Exercises Write code to find: 
+•Customers with .com accounts 
+      queryset = Customer.objects.filter(email__icontains='.com')
+
+      return render(request, 'hello.html', {'name': 'kenastark', 'products': list(queryset), 'customers': list(queryset1)}) 
+•Collections that don’t have a featured product
+
+    queryset = Collection.objects.filter(featured_product_id__isnull=True)
+
+
+•Products with low inventory (less than 10)
+
+      queryset = Product.objects.filter(inventory__lt=10)
+
+
+•Orders placed by customer with id = 1
+
+      queryset2 = Order.objects.filter(customer_id=1)
+
+•Order items for products in collection 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
