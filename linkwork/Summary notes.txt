@@ -279,8 +279,14 @@ QuerySets are lazy, meaning they evaluate at a later point.
 We can use QuerySets methods to build complex queries. Chaining methods together is how you build a new QuerySets
 eg    query_set.filter().filter().order_by()
 
+5 - Retrieving Objects
 
+use the pk argument in the get() to select a singul object. Django will automatically translate this to the name of the primary key field
+eg get(pk=1). The get() method returns an acutal object because nothing else will be done with the object.
 
+.first()..returns none if the QuerySets is empty
+.exist()..checks the existence of an object. returns a boolean value 
 
+6 - Filtering Objects 
 
 
