@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse
+from django.db.models import Q #short for Query
 from store.models import *
 
 
@@ -18,7 +18,7 @@ def say_hello(request):
    #for dates
    #queryset = Product.objects.filter(description__isnull=True)
 
-   queryset = Product.objects.filter(inventory__lt=10)
+   queryset = Product.objects.filter(Q(inventory__lt=10) &  ~Q(unit_price__lt=20))
    queryset1 = Customer.objects.filter(email__icontains='.com')
    queryset2 = Order.objects.filter(customer_id=1)
 

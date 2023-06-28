@@ -284,6 +284,9 @@ QuerySets are lazy, meaning they evaluate at a later point.
 We can use QuerySets methods to build complex queries. Chaining methods together is how you build a new QuerySets
 eg    query_set.filter().filter().order_by()
 
+QuerySet API Reference
+https://docs.djangoproject.com/en/4.2/ref/models/querysets/
+
 5 - Retrieving Objects
 
 use the pk argument in the get() to select a singul object. Django will automatically translate this to the name of the primary key field
@@ -351,9 +354,14 @@ Filtering Exercises Write code to find:
 
 
 
+7 - Complex Lookups Using Q Objects
 
+You use Q objects to combine conditions using the OR operator. Using the Q class, you can represent a query expression or a code that produces a value.
 
+Using Q you can encapsulate a keyword argument
+you can use | , & , ~(not) operators with the Q
 
+8 - Refercing Fields Using F objects
 
 
 
