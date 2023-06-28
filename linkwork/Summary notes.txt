@@ -381,3 +381,40 @@ you can add order_by() after filtering because filter() returns a querset object
 .earliest('unit_price) is used to return the first object after it sorts. It returns an object
 .latest() - sorts in descending order and returns the first object
 
+9 - Limiting Results
+
+to limit the results returned, use python Array slicing syntax [:5]
+
+[5:10] -  will return the next five products on the second page (assuming your page size is 5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
