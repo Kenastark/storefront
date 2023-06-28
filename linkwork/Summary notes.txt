@@ -1,0 +1,375 @@
+Django is a free and open-source framework for building web applications with python.
+Frameworks:
+1.	Django
+2.	Flask
+3.	Tornado
+4.	Bottle
+5.	Flacon
+6.	Hug
+ 
+Companies like Youtube, Instagram, Spotify and Dropbox use Django
+
+FEATURES OF DJANGO
+1.	The admin site: an admin interface for managing our data
+2.	Object relational mapper (ORM); that abstract the database so we can query or persists data without writing a lot of SQL code
+3.	Authentication package: for identifying users.
+4.	Caching data
+
+Points to consider when choosing a framework.
+i.	Maturity
+ii.	Stable
+iii.	Difficulty Learning curve.
+iv.	Community
+
+Pipenv: is a dependency management tool for installing our application dependencies in virtual environments. This way our app dependency will not clash with other applications dependency.
+
+Pipfile is similar to package.json for javascript project
+
+Run `pipenv shell` to activate the virtual environment
+
+`django-admin` is a utility that comes with Django
+
+`Django-admin startproject <project-name> .` . The period(.) tells Django to use the current directory as the project directory. The directory created is the core of our application. In the directory, we have:
+1.	__init__.py which defines this directory as a package.
+2.	Asgi.py used for deployment
+3.	Settings.py where we define our application setting
+4.	Urls.py where we define urls for our application
+5.	Wsgi.py used for deployment.
+6.	Manage.py this is a wrapper around Django-admin. It takes the settings for this project into account. It is used now that we have a project
+
+`python manage.py runserver <port-number>`. The default port is 8000
+
+` pipenv –venv` to find the path to our virtual environment
+
+7 – Creating Your First App
+Every Django project is a collection of various apps each providing a certain functionality. 
+
+Every Django project has these apps by default:
+    'django.contrib.admin' – gives as an admin interface for managing our data
+    'django.contrib.auth'	-  used for authenticating users
+    'django.contrib.contenttypes'	 - later
+    'django.contrib.sessions' -  legacy not used anymore. A session is a temporary memory on a server for managing users data
+        'django.contrib.messages'  -  used for displaying one time notification to the user.
+        'django.contrib.staticfiles' – for serving statis files eg images, CSS, etc
+ 
+`python manage.py startapp <app-name>` to create a new Django app. Each app has the same folder structure.
+i.	Migrations folder: for generating database tables
+ii.	Admin: where we define how the admin interface for the app is going to look like
+iii.	Apps: where we configure the app
+iv.	Models: where we define the model classes for the app. We use model classes to pull out data from the database and present to the user.
+v.	Tests: where we write our unit tests
+vi.	Views: a request handler
+
+Everytime you create an app in Django, you need to register it under INSTALLED_APPS in settings.py
+
+8 – Writing Views
+
+A view function is a function that takes a request and return a response. It is a request handler. It is called ‘action’ in other frameworks. We define our views function in views.py under our app.
+
+You map views to URL so when we get a request at that URL, the function is called.
+
+9 – Mapping URLs to Views
+
+Any url starting with 'playgound/' will be routed to the urls conf module in the playground app as shown in the include() function
+   urlpatterns = [
+ path('playground/', include('playground.urls'))
+]
+
+
+10 - Using Templates 
+
+Use template to return HTML content to the client
+
+12 - Using Django Debug Toolbar
+
+We use middleware to hook into django's request response processing
+
+BUILDING A DATA Models
+Models are used to store and retrieve data
+
+Association class: represents the relationship between two entities.
+
+You create apps in Django that serves a specific functionality or represents a distinct feature of the application. An app is designed to be reusable and can be plugged into multiple Django projects. 
+
+An app refers to a self-contained module or component of a Django project.
+
+7 -Defining One-to-One relationship
+
+on_delete=models.CASCADE - means if parent is deleted, the child is also deleted
+
+on_delete=models.SET_NULL - when parent is deleted, the child is not deleted. Parent record will be set to NULL
+
+on_delete=models.SET_DEFAULT - this field will be set ot default value
+
+on_delete=models.PROTECT - To prevent deletion. If child is present, parent cannot be deleted. You must to first delete the child before deleting the parent.
+
+8 - One-to-Many 
+
+Use customer = models.ForeignKey(<class-name>, on_delete=models.PROTECT) to define a one to many relation. With the <class-name> referencing the Parent class(Primary Key)
+
+9 - Defining a Many-to-Many relationship
+We can define the relationship in either of these classes and Django automatically create the reverse relationship.
+
+We define the relationship in the Product class because we might have a product we are showing to the user and at the same time, we want to show all the promotions that apply to that product. Django automatically create the reverse relationship 
+      promotions = models.ManyToManyField(Promotion, related_name='products')
+    related_name will be used in the Promotion class to create a field that returns all the product that a particular promotion is applied to (default was 'product_set')
+
+10 - Resolving Circular Relationships
+
+Circular dependency is something to avoid. It happens when two classes depend on each other at the same time.
+
+Use related_name='+' to tell Django not the create the reverse relationship
+
+
+11 - Generic Relationships
+
+To identify any object in your application in a generic way, you need two pieces of information:
+  1. Type (product, video, article)...we can find the table
+  2. ID....we cna find the record
+
+  in database terms, you can identify any record in any table using the above
+
+ ContentType is an abstract model which comes with django. Using ContentType, we can create generic relationships within our models. It is used to identify the type of an object
+
+ContentType is a model that represents the type of an object in our application. It is a model like any model in our application but it is specifically made for allowing generic relationships.
+
+Use GenericForeignKey() with <content_object> to get the actual object that the tag is applied to that is, the actual product.
+
+To define a generic relationship, they are three things we need to define:
+  1. content_type
+  2. object_id
+  3. content_object
+
+  auth is an app automatically installed in every Django project. We use it to authenticate and authorize users
+
+Model Field Reference
+https://docs.djangoproject.com/en/4.2/ref/models/fields/
+
+
+SETTING UP THE DATABASE
+
+Django supports the following DBMS:
+  1. SQLite - Light weight db engine used for development and low traffic website
+  2. PostgreSQL - for serious projects..most common
+  3. MySQL - for serious projects..most common
+  4. MariaDB - for serious projects
+  5. Oracle - for serious projects officially supported by Django
+  6. Microsoft SQL
+
+3 - Creating Migrations
+
+We use Migrations to create or update database tables based off our models we have in our project.
+          python manage.py makemigrations
+    run this commandto generate a new migration
+
+    cmd + T is the "go to symbol" command
+Slugs are used for SEO (Search Engine Optimization). Use models.SlugField(default='-') to set a default value or use null=True for your slug because slug cannot be null. You can also set null=True.
+
+The main reason for adding a slug, is to make is to make it easy fro search engines to find our content. It is a SEO technique
+
+4 - Running Migrations
+
+Each migrations describes a set of changes. Each migration is like a commit in a Version Control System (VCS).
+
+
+Sqlite is a very lightweight database used for development purposes or very small websites
+
+tables under the auth app under SQLITE EXPLORER. they are used for authenticatng and authorising users.
+
+The django_migration table keep track of the migrations that have been applied this database 
+                    python manage.py migrate
+         is used to run migrations. 
+
+         Running your migrations is used to effect whatever changes you have made
+
+django_admin_log
+django_content_type
+django_migrations_migrations
+                        python manage.py sqlmigrate
+    with this we can see the SQL code that is sent to our database at runtime. add 'store 0003' to see the SQL code for the third migration in the store app. '0003' is the sequence number for the migration file. Shown below
+
+                    python manage.py sqlmigrate store 0003
+            the sql code generated is depended on the database backend we use
+  
+5 - Customizing Database Schema
+
+Defining metadata in a class is used to gain more control over your database Schema.
+        class Meta:
+    Is where we define meta data about this model
+
+Indexes are used to speed up our queries
+
+Model Meta Options
+https://docs.djangoproject.com/en/4.2/ref/models/options/
+
+6 - Reverting Migrations
+
+the proper way to remove migrations is to delete the code in our updated codebase and associated migration file or else the next time we create a migration, django will create a new migration fro applying the changes  to our database with the undeleted code
+          git log --oneline
+
+7 - 8 had no signifant note
+
+9 - Using MySQL in Django
+
+MySQL Client is a package that you must install to connect your django project to MySQL
+
+            pipenv install mysqlclient..is used to install mysql client. Installing this package allows us to change the engine under DATABASES (in settings.py) to 'backends.mysql'
+
+            mysql -u root -p...to test your installation of MySQL if it is correct
+
+            ctrl + D to escape/quit
+
+            Shift + cmd + O..is used to open symbols(variables, classes, functions) editor
+
+10 - Running Custom SQL
+
+Create an empty migration and wrtie your SQL code to gain full control over generating or updating your database Schema.
+
+              python manage.py makemigrations store --empty
+              Used to create an empty migration
+
+              migrations.RunSQL
+              a class defined in the migrations module
+
+
+
+11 - Generating Dummy Data
+
+mockaroo.com is used to generate dummy data
+
+
+DJANGO ORM
+
+Use Django object relational mapper (ORM) to query and manupulate data 
+
+
+2 - Django ORM
+
+An ORM maps objects to relational records and it frees use from writing a lot of repetitive code.
+
+ORMs help to:
+1. Reduce complexity in code
+2. Make the code more understandable
+3. Help us get more done in less time
+
+
+Migrations are part of django ORM.
+models.Model are part of django ORM.
+
+ORMs do not work well when dealing with complex queries
+
+
+
+4 - Mangers and QuerySets
+
+Every model in django has an attribute called Objects, this returns a manager object.
+
+A manager is an interface to the database. Like a remote control with buttons we can use to talk to our database.
+
+We have a bunch of methods for querying or updating data:
+
+    Product.object.all()..for pulling up all the objects in the product table
+    Product.object.get()..for getting a singular object
+    Product.object.filter()..for filtering data
+    Product.object.all()
+  most methods return a QuerySets. Count() methods returns result immediately
+
+A QuerySets is an object that encapsulates a query. It heppens under the following scenarious:
+i. when we iterate over a query set.
+ii. when we convert it to a list
+iii. when we access an individual element or when we slice it.
+
+QuerySets are lazy, meaning they evaluate at a later point.
+
+We can use QuerySets methods to build complex queries. Chaining methods together is how you build a new QuerySets
+eg    query_set.filter().filter().order_by()
+
+QuerySet API Reference
+https://docs.djangoproject.com/en/4.2/ref/models/querysets/
+
+5 - Retrieving Objects
+
+use the pk argument in the get() to select a singul object. Django will automatically translate this to the name of the primary key field
+eg get(pk=1). The get() method returns an acutal object because nothing else will be done with the object.
+
+.first()..returns none if the QuerySets is empty
+.exist()..checks the existence of an object. returns a boolean value 
+
+6 - Filtering Objects 
+
+You cannot use logical operators within .filter() because it returns a boolean value. Instead, you use a keyword argument
+eg    unit_price__gt - greater than
+      unit_price__gte - greater than or equal to
+      unit_price__lt - less than
+      unit_price__lte - less than or equal to
+      https://docs.djangoproject.com/en/4.2/ref/models/querysets/
+
+
+You can filter across relationships by using two underscores as shown:
+    .filter(collection__id__range=(1,2,3)) 
+  
+The first `__` helps us to navigate the relationship, we then type any of the attribute or fields of the collection class.
+For example,
+                .filter(collection__id=1)
+
+__range is the lookup type
+
+STRINGS
+title__contains='coffee'
+title__icontains - case insensitive Search
+title__startswith
+title__istartswith='coffee 
+title__endswith
+
+
+DATES
+.filter(last_update__year=2021)
+.filter(last_update__month=6)
+.filter(last_update__day=1)
+.filter(last_update__date='2016-06-02')
+
+.filter(description__isnull=True)
+
+EXERCISES
+Filtering Exercises Write code to find: 
+•Customers with .com accounts 
+      queryset = Customer.objects.filter(email__icontains='.com')
+
+      return render(request, 'hello.html', {'name': 'kenastark', 'products': list(queryset), 'customers': list(queryset1)}) 
+•Collections that don’t have a featured product
+
+    queryset = Collection.objects.filter(featured_product_id__isnull=True)
+
+
+•Products with low inventory (less than 10)
+
+      queryset = Product.objects.filter(inventory__lt=10)
+
+
+•Orders placed by customer with id = 1
+
+      queryset2 = Order.objects.filter(customer_id=1)
+
+•Order items for products in collection 
+
+
+
+7 - Complex Lookups Using Q Objects
+
+You use Q objects to combine conditions using the OR operator. Using the Q class, you can represent a query expression or a code that produces a value.
+
+Using Q you can encapsulate a keyword argument
+you can use | , & , ~(not) operators with the Q
+
+8 - Refercing Fields Using F objects
+
+Using the F class, you can reference a particular field
+
+Using F objects, you can also reference a field in a related table
+
+
+
+
+
+
+
