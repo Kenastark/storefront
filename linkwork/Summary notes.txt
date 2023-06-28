@@ -363,8 +363,9 @@ you can use | , & , ~(not) operators with the Q
 
 8 - Refercing Fields Using F objects
 
+Using the F class, you can reference a particular field
 
-
+Using F objects, you can also reference a field in a related table
 
 
 
