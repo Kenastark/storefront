@@ -18,8 +18,8 @@ def say_hello(request):
    #for dates
    #queryset = Product.objects.filter(description__isnull=True)
 
-   queryset = Product.objects.defer('description')
+   queryset = Product.objects.prefetch_related('promotions').select_related('collection')[:5]
    queryset1 = Customer.objects.filter(email__icontains='.com')[:5]
-   queryset2 = Order.objects.values('payment_status').order_by('payment_status')
+   queryset2 = Order.objects.select_related('customer').prefetch_related('orderitem_set__product').order_by('-placed_at')[:5]
 
    return render(request, 'hello.html', {'name': 'kenastark', 'products': list(queryset), 'customers': list(queryset1), 'orders': list(queryset2)}) 

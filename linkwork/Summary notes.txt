@@ -417,11 +417,20 @@ NOTE: Be careful when using the .only() or else you end up with a lot of extra u
 .defer() -  is used to defer the loading of certain fields to later
 
 
+13 - Selecting Related objects
+
+.select_related(), django creates a join between our tables
+
+we can also span relationships using double underscores (__) eg select_related()
+
+We use select_related when the other end of the relationship has one instance eg A product has one collection.
+
+prefetch_related is used when the other end of the relationship has many objects. It creates two sets( of queries). Django reads these sets and then populate our objects in memory
 
 
+both select_related & prefetch_related returns queryset object. Order of arrangement does not matter.
 
-
-
+NOTE: use double underscores to select target fields 
 
 
 

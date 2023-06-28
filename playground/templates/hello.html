@@ -11,7 +11,7 @@
         <ul>
             {% for product in products %}
             <li>
-                {{ product.title }} ${{ product.unit_price}}
+                {{ product.title }} - {{ product.collection.title}}
             </li>
             {% endfor %}
         </ul>
@@ -30,7 +30,7 @@
         <ul>
             {% for order in orders %}
             <li>
-                {{ order.payment_status }}
+                {{ order.id }} - {{order.customer.first_name}}
             </li>
             {% endfor %}
         </ul>
