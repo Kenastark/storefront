@@ -368,8 +368,16 @@ Using the F class, you can reference a particular field
 Using F objects, you can also reference a field in a related table
 
 
+9 - Sorting
 
+      Product.objects.order_by('title') is used to sort a result by one or more fields
+      Product.objects.order_by('-title') - adding  `-` before the field does a descending sort
 
+.orber_by() returns a queryset
+adding a .reverse() method at the end of the above, it will reverse the direction of the sort.
 
+you can add order_by() after filtering because filter() returns a querset object and order_by() is a method of a queryset object.
 
+.earliest('unit_price) is used to return the first object after it sorts. It returns an object
+.latest() - sorts in descending order and returns the first object
 

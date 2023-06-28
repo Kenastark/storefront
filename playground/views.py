@@ -18,7 +18,7 @@ def say_hello(request):
    #for dates
    #queryset = Product.objects.filter(description__isnull=True)
 
-   queryset = Product.objects.filter(inventory =F('collection__id'))
+   queryset = Product.objects.order_by('title')
    queryset1 = Customer.objects.filter(email__icontains='.com')
    queryset2 = Order.objects.filter(customer_id=1)
 
