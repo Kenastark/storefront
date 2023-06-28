@@ -11,7 +11,7 @@
         <ul>
             {% for product in products %}
             <li>
-                {{ product.title }}
+                {{ product.title }} ${{ product.unit_price}}
             </li>
             {% endfor %}
         </ul>

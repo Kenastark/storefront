@@ -18,7 +18,7 @@ def say_hello(request):
    #for dates
    #queryset = Product.objects.filter(description__isnull=True)
 
-   queryset = Product.objects.filter(id__in=OrderItem.objects.values('product_id').distinct()).order_by('title')
+   queryset = Product.objects.defer('description')
    queryset1 = Customer.objects.filter(email__icontains='.com')[:5]
    queryset2 = Order.objects.values('payment_status').order_by('payment_status')
 

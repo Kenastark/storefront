@@ -387,7 +387,11 @@ to limit the results returned, use python Array slicing syntax [:5]
 
 [5:10] -  will return the next five products on the second page (assuming your page size is 5)
 
+
+
 11 - Selecting Related Objects
+
+
 
 Use .value() to related selected fields 
 
@@ -400,11 +404,17 @@ NOTE: Use double underscore (__) to access related fields
 .distinct() - is used to remove duplicates
 
 
+12 - Deferring Fields 
 
 
+.only() method used to specfiy the fields you want to read from the database
+
+.only() u get instances of the class, while with .values() you get dictionary objects
+
+NOTE: Be careful when using the .only() or else you end up with a lot of extra unnecessary queries. This problem does not happen with .value() because dictionary do not issue a query to the database for objects that don't exist
 
 
-
+.defer() -  is used to defer the loading of certain fields to later
 
 
 
