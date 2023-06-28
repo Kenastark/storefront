@@ -381,18 +381,23 @@ you can add order_by() after filtering because filter() returns a querset object
 .earliest('unit_price) is used to return the first object after it sorts. It returns an object
 .latest() - sorts in descending order and returns the first object
 
-9 - Limiting Results
+10 - Limiting Results
 
 to limit the results returned, use python Array slicing syntax [:5]
 
 [5:10] -  will return the next five products on the second page (assuming your page size is 5)
 
+11 - Selecting Related Objects
 
+Use .value() to related selected fields 
 
+NOTE: Use double underscore (__) to access related fields
 
+.values method() returns a dictionary object
 
+.values_list returns a tuple, not a dictionary
 
-
+.distinct() - is used to remove duplicates
 
 
 
