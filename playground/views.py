@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.db.models.aggregates import Count, Max, Min, Avg, Sum
+from django.db.models import Value, F
 from store.models import *
 
 
@@ -23,16 +23,18 @@ def say_hello(request):
    #queryset2 = Order.objects.select_related('customer').prefetch_related('orderitem_set__product').order_by('-placed_at')[:5]
 
 
-   result = Product.objects.aggregate(count=Count('id'), min_price=Min('unit_price'))
-   result1 = Order.objects.aggregate(count=Count('id'))
-   result2 = OrderItem.objects.filter(product__id=1).aggregate(unit_sold=Sum('quantity'))
-   result3 = Order.objects \
-      .filter(customer__id=1) \
-      .aggregate(count=Count('id'))
+   # result = Product.objects.aggregate(count=Count('id'), min_price=Min('unit_price'))
+   # result1 = Order.objects.aggregate(count=Count('id'))
+   # result2 = OrderItem.objects.filter(product__id=1).aggregate(unit_sold=Sum('quantity'))
+   # result3 = Order.objects \
+   #    .filter(customer__id=1) \
+   #    .aggregate(count=Count('id'))
    
-   result4 = Product.objects.filter(collection__id=3) \
-      .aggregate(
-         min_price=Min('unit_price'),
-         max_price=Max('unit_price'),
-         avg_price=Avg('unit_price'))
-   return render(request, 'hello.html', {'name': 'kenastark','result':result, 'result1': result1,'result2': result2, 'result3': result3, 'result4': result4}) 
+   # result4 = Product.objects.filter(collection__id=3) \
+   #    .aggregate(
+   #       min_price=Min('unit_price'),
+   #       max_price=Max('unit_price'),
+   #       avg_price=Avg('unit_price'))
+
+   queryset = Customer.objects.annotate(new_id=F('id') + 1)
+   return render(request, 'hello.html', {'name': 'kenastark','result': list(queryset)})  

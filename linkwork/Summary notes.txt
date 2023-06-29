@@ -441,7 +441,19 @@ NOTE: use double underscores to select target fields
 .aggregate is one of the methods of QuerySet. So you can apply it whenever you have a queryset. For example, you can filter() first, then apply the aggregate method
 
 
+15 - Annotating Objects
 
+you cannot pass boolean values in the .annotate() method. You need to pass an expression object.
+
+The Expression class in django is the base class of all types of expression. The derivates of this class are:
+
+1. Values - for representing simple values like number, boolean, string
+
+2. F - used to referencing a feild in the same or another table. It is an expression object.
+
+3. Func - for calling database functions used for manipulating data.
+
+4. Aggregate class - is the base class for all aggregate classes
 
 
 
