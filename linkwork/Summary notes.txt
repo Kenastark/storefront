@@ -433,6 +433,22 @@ both select_related & prefetch_related returns queryset object. Order of arrange
 NOTE: use double underscores to select target fields 
 
 
+14 - Aggregating Objects  
+
+.aggregate is used to compute summaries
+
+
+.aggregate is one of the methods of QuerySet. So you can apply it after filtering for instance
+
+
+
+
+
+
+
+
+
+
 
 
 
