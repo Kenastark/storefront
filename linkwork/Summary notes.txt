@@ -438,7 +438,7 @@ NOTE: use double underscores to select target fields
 .aggregate is used to compute summaries
 
 
-.aggregate is one of the methods of QuerySet. So you can apply it after filtering for instance
+.aggregate is one of the methods of QuerySet. So you can apply it whenever you have a queryset. For example, you can filter() first, then apply the aggregate method
 
 
 
