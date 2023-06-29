@@ -456,9 +456,14 @@ The Expression class in django is the base class of all types of expression. The
 4. Aggregate class - is the base class for all aggregate classes
 
 
+16 -  Calling Database function
 
+.Func() is used to call database functions
 
+function='CONCAT' - This is an example of a keyword argument that is used to call the name of the target function
 
+Django Database Functions
+https://docs.djangoproject.com/en/4.2/ref/models/database-functions/
 
 
 

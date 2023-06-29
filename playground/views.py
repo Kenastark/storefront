@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.db.models import Value, F
+from django.db.models import Value, F, Func
+from django.db.models import Concat 
 from store.models import *
 
 
@@ -36,5 +37,14 @@ def say_hello(request):
    #       max_price=Max('unit_price'),
    #       avg_price=Avg('unit_price'))
 
-   queryset = Customer.objects.annotate(new_id=F('id') + 1)
+   #CONCAT
+   queryset = Customer.objects.annotate(
+         full_name = Func(F('first_name'), Value(' '), 
+                          F('last_name'), function='CONCAT')
+   )
+
+   # SHorter method
+   queryset = Customer.objects.annotate(
+         full_name = Concat('first_name', Value(' '), 'last_name') #the space is wrapped in a values object so django doesnot think it is a column in our table
+   )
    return render(request, 'hello.html', {'name': 'kenastark','result': list(queryset)})  
