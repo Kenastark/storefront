@@ -465,6 +465,10 @@ function='CONCAT' - This is an example of a keyword argument that is used to cal
 Django Database Functions
 https://docs.djangoproject.com/en/4.2/ref/models/database-functions/
 
+17 - Grouping Data
+
+
+
 
 
 
