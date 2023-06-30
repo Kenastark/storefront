@@ -453,7 +453,7 @@ The Expression class in django is the base class of all types of expression. The
 
 3. Func - for calling database functions used for manipulating data.
 
-4. Aggregate class - is the base class for all aggregate classes
+4. Aggregate class - is the base class for all aggregate classes like Count, Sum
 
 
 16 -  Calling Database function
@@ -468,8 +468,11 @@ https://docs.djangoproject.com/en/4.2/ref/models/database-functions/
 17 - Grouping Data
 
 
+18 - Working With Expression Wrappers
 
+The Expression class is the base clase of all types of expressions
 
+Expression wrapper is used when building complex expressions
 
 
 
