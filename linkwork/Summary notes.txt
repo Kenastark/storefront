@@ -475,6 +475,21 @@ The Expression class is the base clase of all types of expressions
 Expression wrapper is used when building complex expressions
 
 
+19 - Querying Generic Relationships
+
+ContentType is a model, therefore it has the objects attribute
+
+.get_for_model() method is a special method only available in the objects manager
+
+The objects attribute returns a manager object which is a gateway to the database. ContentType manager has a special method called .get_for_model()
+
+content_type represents an instance i.e a row in the table
+
+
+
+
+
+
 
 
 
