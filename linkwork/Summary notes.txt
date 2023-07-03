@@ -500,6 +500,10 @@ Reading data from disk is expensive and it is always slower than reading from me
 
 Caching happens only if we evaluate the entire queryset first
 
+22 - Creating objects
+
+
+
 
 
 
