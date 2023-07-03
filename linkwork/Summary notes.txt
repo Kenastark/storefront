@@ -494,8 +494,11 @@ NOTE:using the self parameter in a method makes it become a method of the class 
 
 You need to include your newly defined custom Manager in the Class in the created it for by adding a new attribute and set it to an instance of the defined custom manager class you created
 
+21 - Understanding QuerySet Cache
 
+Reading data from disk is expensive and it is always slower than reading from memory
 
+Caching happens only if we evaluate the entire queryset first
 
 
 
