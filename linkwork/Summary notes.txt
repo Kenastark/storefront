@@ -486,7 +486,13 @@ The objects attribute returns a manager object which is a gateway to the databas
 content_type represents an instance i.e a row in the table
 
 
+20 - Custom Managers
 
+.Manager class is the base class for all Managers
+
+NOTE:using the self parameter in a method makes it become a method of the class it is defined under.
+
+You need to include your newly defined custom Manager in the Class in the created it for by adding a new attribute and set it to an instance of the defined custom manager class you created
 
 
 
