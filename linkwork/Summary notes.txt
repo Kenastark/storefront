@@ -502,6 +502,46 @@ Caching happens only if we evaluate the entire queryset first
 
 22 - Creating objects
 
+In RDBMS, the parent record must exist before you create the child record
+
+                  collection.featured_product = Product(pk=1) #first method
+   #or
+                  collection.featured_product_id = 1 #second method
+
+You can set the fields using keyword arguments while creating the Collection object. There are problems with this approach:
+      1. No IntelliSense
+      2. Keyword arguments don't get updated when you rename a field
+
+use .save() method to insert the collection into your database. If no id is selected, Django will treat it as an insert operation.
+
+
+            collection = Collection.objects.create(name='a', featured_product_id=1)
+
+the create() method above will create a collection object and initialize this object based on the keyword argument and then it will call the save() method to insert this collection in the database.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
