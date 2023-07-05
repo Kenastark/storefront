@@ -521,7 +521,7 @@ the create() method above will create a collection object and initialize this ob
 
 23 - Updating Objects
 
-Lets say you want to only update the featured_product not including the 'title'. Django will set the title = " " (empty string) which causes data loss. The reson for this is that the collection object in memory has collection.title = ' ' by default
+Lets say you want to only update the featured_product not including the 'title'. Django will set the title = " " (empty string) which causes data loss. The reason for this is that the collection object in memory has collection.title = ' ' by default
 
 
 Django does not have change tracking.
@@ -530,7 +530,9 @@ To properly update an object in Django applications, first we have to read it fr
 
 Use Collection.objects.filter(pk=14).update(featured_product=None) to avoid reading a collection first before updating it. You can update it directly in the database
 
+24 - Deleting objects
 
+collection.delete() - used to delete the entire collection
 
 
 
