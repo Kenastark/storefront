@@ -535,9 +535,22 @@ Use Collection.objects.filter(pk=14).update(featured_product=None) to avoid read
 collection.delete() - used to delete the entire collection
 
 
+   Collection.objects.filter(id__gt=10).delete() - To delete a specific records
 
 
 
+   25 - Transactions
+
+In RDBMS, you must always create the parent record first before you.
+
+Transactions help create multiple changes to a database in an atomic way, meaning all changes should be saved together. If one of the changes fails, then all changes should be rolled back.
+
+
+Use Transactions to prevent your DB from being in an inconsistent state.
+
+            from django.db import transaction
+
+@transaction.atomic() function can be used as a decorator or a context manager to a function and it will wrap the entire function inside the transaction
 
 
 

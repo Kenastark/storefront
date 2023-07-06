@@ -1,26 +1,25 @@
 from django.shortcuts import render
-from django.contrib.contenttypes.models import ContentType
+from django.db import transaction
 from store.models import *
-from tags.models import TaggedItem
+
 
 # Create your views here.
 def say_hello(request):
+
+   #...
   
-   # collection = Collection(pk=14)
-   # collection.title = 'Games'
-   # collection.save()
+   with transaction.atomic():
+      # Parent record created first
+      order = Order()
+      order.customer_id=1
+      order.save()
 
-   #Collection.objects.filter(pk=15).update(featured_product=None)
-
-   #code to change the id in the collection table
-   #Collection.objects.filter(pk=15).update(id=12)
-
-   #to delete multiple objects
-
-   Collection.objects.filter(id__gt=10).delete()
-   
-   #alternative to the four lines above
-   #collection = Collection.objects.create(name='a', featured_product_id=1)
-   #collection.id
+      # Child record
+      item = OrderItem()
+      item.order = order
+      item.product_id = -1
+      item.quantity = 1
+      item.unit_price = 10
+      item.save()
 
    return render(request, 'hello.html', {'name': 'kenastark'})  
