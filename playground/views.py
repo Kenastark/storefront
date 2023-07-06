@@ -7,6 +7,6 @@ from store.models import *
 def say_hello(request):
 
    with connection.cursor() as cursor:
-      cursor.execute('SELECT * FROM store_order')
+      cursor.execute('SELECT id, placed_at FROM store_order')
 
    return render(request, 'hello.html', {'name': 'kenastark'})  

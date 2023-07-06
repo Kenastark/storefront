@@ -550,7 +550,34 @@ Use Transactions to prevent your DB from being in an inconsistent state.
 
             from django.db import transaction
 
-@transaction.atomic() function can be used as a decorator or a context manager to a function and it will wrap the entire function inside the transaction
+@transaction.atomic() function can be used as a decorator or a context manager to a function and it will wrap the entire function inside the transaction.
+
+
+26 - Exceuting Raw SQL queries
+
+Django ORM helps us in writing and executing SQL queries without neccessarily writng SQL code
+
+Product.objects.raw() - Every manager has the .raw() method for executing raw SQL queries
+
+Use this approach when:
+1. Dealing iwth complex queries
+2. If the query that Django generates does not perform well
+
+In situations were you need ot execute queries that do not map to our model objects. In those cases, you can access the database directly and bypass the model layer. Use Cursor()
+
+After running your queries with cursor(), always close the cursor using cursor.close() to release the allocated resources.
+
+The proper way to use a cursor is to wrap the cursor inside a TRY FINAL block. Inside the FINAL block, we close the cursor so if something goes wrong, we do not end up with an open cursor.
+
+Using a cursor with a WITH statement is much easier
+
+            with connection.cursor() as cursor:
+      returns a cursor object. The cursor is explicitly closed with this method
+
+cursor.callproc() method is used for executing stored procedures. It is better than wrting SQL in the middle of your python code.
+
+You write your SQL code inside  a stored procedure and call it in Python
+
 
 
 
