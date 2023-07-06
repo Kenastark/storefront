@@ -6,8 +6,7 @@ from store.models import *
 # Create your views here.
 def say_hello(request):
 
-   cursor = connection.cursor()
-   cursor.execute('SELECT * FROM store_product')
-   cursor.close()
+   with connection.cursor() as cursor:
+      cursor.execute('SELECT * FROM store_order')
 
-   return render(request, 'hello.html', {'name': 'kenastark', 'result': list(queryset)})  
+   return render(request, 'hello.html', {'name': 'kenastark'})  
