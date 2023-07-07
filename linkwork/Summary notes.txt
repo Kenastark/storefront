@@ -604,7 +604,18 @@ Use the code below to customize some interfact on the Admin site. Write in the u
 
 3 - Registering Models 
 
+Every django app has a admin.py module where you customize the administration panel for that app.
 
+admin.site.register(models.Collection) - Is used to register the COllection Model under the admin.py module.
+
+To change the strogn representation of an object in python, we override the magic stir method (__str__):
+            def __str__(self) -> str:
+                   return self.title
+
+
+Use metaclass to define the default ordering of collection object.
+
+Model Meta is basically the inner class of your model class. Model Meta is basically used to change the behavior of your model fields like changing order options,verbose_name, and a lot of other options.
 
 
 
