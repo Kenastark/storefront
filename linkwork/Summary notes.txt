@@ -581,11 +581,28 @@ You write your SQL code inside  a stored procedure and call it in Python
 
 
 
+THE ADMIN SITE 
 
 
+2 - Setting Up the Admin Site 
+
+Run 'python manage.py createsuperuser' to create a new user
+
+The Admin app is depended on the Session App
+
+So you have to Add the sessions app in the list of INSTALLED_APPS
+
+Then run 'python manage.py migrate' to generate the tables for this app
+
+Run 'python manage.py changepassword admin' 
 
 
+Use the code below to customize some interfact on the Admin site. Write in the urls.py module under your project folder
+            admin.site.site_header = 'Storefront Admin'
+            admin.site.index_title = 'Admin'
 
+
+3 - Registering Models 
 
 
 
