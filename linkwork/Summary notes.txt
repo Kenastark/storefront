@@ -638,5 +638,22 @@ Google Django ModelAdmin to see the list of options we can set
 PS: you can set the ordering = ['field_name'] in the class Meta: under the model definition or under the `class CustomerAdmin(admin.ModelAdmin):` in the admin.py module
 
 
+5 - Adding Computed columns
+
+@admin.display(ordering='inventory') decorator is used to add sorting to a calculated column
+
+Use a defined function def `inventory_status(self, product):` to return a calculated column
+
+
+
+
+
+
+
+
+
+
+
+
 
 
