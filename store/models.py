@@ -30,7 +30,7 @@ class Product(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['title']
+        ordering = ['title'] 
 
 
 class Customer(models.Model):
@@ -55,6 +55,13 @@ class Customer(models.Model):
         indexes = [
             models.Index(fields=['last_name', 'first_name'])
         ]
+        
+        
+
+    def __str__(self) -> str:
+        return self.title
+
+      
 
 
 class Order(models.Model):

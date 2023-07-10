@@ -606,9 +606,9 @@ Use the code below to customize some interfact on the Admin site. Write in the u
 
 Every django app has a admin.py module where you customize the administration panel for that app.
 
-admin.site.register(models.Collection) - Is used to register the COllection Model under the admin.py module.
+admin.site.register(models.Collection) - Is used to register the Collection Model under the admin.py module.
 
-To change the strogn representation of an object in python, we override the magic stir method (__str__):
+To change the string representation of an object in python, we override the magic stir method (__str__):
             def __str__(self) -> str:
                    return self.title
 
@@ -618,7 +618,24 @@ Use metaclass to define the default ordering of collection object.
 Model Meta is basically the inner class of your model class. Model Meta is basically used to change the behavior of your model fields like changing order options,verbose_name, and a lot of other options.
 
 
+4 - Customizing the List page
 
+By convention, use the name of your model followed by the word "Admin" (eg ProductAdmin) to create a new class under admin.py in your app. With this class, you can specfiy how you want to edit or view your Products. 
+
+You will need to pass it while registering the product model. We do this using the registered decorator.
+
+            @admin.register(models.Product)
+
+
+The above code replaces this code -> admin.site.register(models.Product)
+
+list_display = ['title', 'unit_price'] - To display the listed columns
+list_editable = ['unit_price'] - To make the listed field editable
+list_per_page = 10 - To set the no. of enteries per page
+
+Google Django ModelAdmin to see the list of options we can set 
+
+PS: you can set the ordering = ['field_name'] in the class Meta: under the model definition or under the `class CustomerAdmin(admin.ModelAdmin):` in the admin.py module
 
 
 
