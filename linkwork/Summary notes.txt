@@ -653,7 +653,18 @@ list_select_related = ['collection] - Does similar work to the queryset code abo
 `return f'{self.first_name} {self.last_name}'` -  This combines first and last_name
 
 
+7 - Overriding the Base QuerySet
 
+
+To override the base queryset used in rendering a list page
+
+Every ModelAdmin has a get_queryset() method which we can override
+
+NOTE: use cmd + . to import unimported modules at the top
+
+Use methods to add calculated columns
+
+Use @admin.display(ordering='fieldname') to sort a calculated column
 
 
 
