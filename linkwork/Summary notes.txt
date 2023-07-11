@@ -644,10 +644,13 @@ PS: you can set the ordering = ['field_name'] in the class Meta: under the model
 
 Use a defined function def `inventory_status(self, product):` to return a calculated column
 
+6 - Selecting Related Objects 
 
+Use queryset.select_related for loading or preloading related fields
 
+list_select_related = ['collection] - Does similar work to the queryset code above. It is used to load related objects on the list page
 
-
+`return f'{self.first_name} {self.last_name}'` -  This combines first and last_name
 
 
 
