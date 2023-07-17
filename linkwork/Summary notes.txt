@@ -667,6 +667,37 @@ Use methods to add calculated columns
 Use @admin.display(ordering='fieldname') to sort a calculated column
 
 
+8 - Providing Links to other Pages 
+
+To generate an HTML link, we import a utility function  `django.utils.html import format_html`
+ return format_html('<a href="http://google.com>{}</a>', collection.products_count) - this is how you use the format_html function.
+
+the reverse() function is used to generate the URL of a page
+
+reverse('admin:appname_nameOfModel_pageName') - this is how you use the reverse function admin:App name_ Model Name_ page you want
+
+To apply a filter, you will need to append a querystring to the URL
+
+To generate the querstring parameters, we use `django.utils.html import urlencode`
+
+A querystrong can contain multiple key-value pairs so we use a dictionary within the urlencode() function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
