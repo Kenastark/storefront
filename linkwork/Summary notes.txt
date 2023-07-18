@@ -108,7 +108,7 @@ on_delete=models.PROTECT - To prevent deletion. If child is present, parent cann
 Use customer = models.ForeignKey(<class-name>, on_delete=models.PROTECT) to define a one to many relation. With the <class-name> referencing the Parent class(Primary Key)
 
 9 - Defining a Many-to-Many relationship
-We can define the relationship in either of these classes and Django automatically create the reverse relationship.
+We can define the relationship in either of these classes and Django automatically create the relationship.
 
 We define the relationship in the Product class because we might have a product we are showing to the user and at the same time, we want to show all the promotions that apply to that product. Django automatically create the reverse relationship 
       promotions = models.ManyToManyField(Promotion, related_name='products')
@@ -672,17 +672,24 @@ Use @admin.display(ordering='fieldname') to sort a calculated column
 To generate an HTML link, we import a utility function  `django.utils.html import format_html`
  return format_html('<a href="http://google.com>{}</a>', collection.products_count) - this is how you use the format_html function.
 
+format_html - To generate a HTML link
+
 the reverse() function is used to generate the URL of a page
 
 reverse('admin:appname_nameOfModel_pageName') - this is how you use the reverse function admin:App name_ Model Name_ page you want
 
 To apply a filter, you will need to append a querystring to the URL
 
-To generate the querstring parameters, we use `django.utils.html import urlencode`
+`django.utils.html import urlencode` - To generate the querstring parameters, we use 
+
+urlencode is used to generate the querstring parameters
 
 A querystrong can contain multiple key-value pairs so we use a dictionary within the urlencode() function
 
+TRYING TO DO THE EXERCISE
+--- I kinda succeeded but not there yet 
 
+search_fields = ['first_name__istartswith', 'last_name__istartswith'] - To add a searchbar. The __istartswith are lookup types
 
 
 
