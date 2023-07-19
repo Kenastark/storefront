@@ -692,11 +692,25 @@ TRYING TO DO THE EXERCISE
 search_fields = ['first_name__istartswith', 'last_name__istartswith'] - To add a searchbar. The __istartswith are lookup types
 
 
+9 - Adding Filtering to the List Page 
+
+list_filter = ['collection', 'last_update']
 
 
+parameter_name = 'inventory' - Will be used in the querystring 
 
+def lookups(self, request, model_admin):
+        return - Used to specify what items wil appear beneath the title = 'inventory'
+         - This returns a list of tuples, each tuple represents one of the filter
 
+Each tuple should have two values
+- the first value is the value you use for filtering
+- the second is a human readable description
 
+def queryset(self, request, queryset):
+        return  - Is where you implement the filtering logic
+
+To use your custom filter, you add it to the list_filter options
 
 
 
