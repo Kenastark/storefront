@@ -691,10 +691,16 @@ TRYING TO DO THE EXERCISE
 
 search_fields = ['first_name__istartswith', 'last_name__istartswith'] - To add a searchbar. The __istartswith are lookup types
 
+9 - Adding Search to the List Page
+search_fields = ['first_name__istartswith', 'last_name__istartswith'] - to add the search bar
 
-9 - Adding Filtering to the List Page 
+10 - Adding Filtering to the List Page 
+
+You define a class to create your custom filter
+            class InventoryFilter(admin.SimpleListFilter):
 
 list_filter = ['collection', 'last_update']
+
 
 
 parameter_name = 'inventory' - Will be used in the querystring 
@@ -710,7 +716,29 @@ Each tuple should have two values
 def queryset(self, request, queryset):
         return  - Is where you implement the filtering logic
 
-To use your custom filter, you add it to the list_filter options
+To use your custom filter, you add it to the list_filter options `list_filter = ['collection', 'last_update', InventoryFilter]`
+
+
+11 - Creating Custom Actions
+
+Every list page comes with a Delete Action for deleting multiple items in one go. You can extend this list and register your own custom action
+
+
+Define a method to create custom actions
+
+      @admin.action(description='Clear inventory')
+      def clear_inventory(self, request, queryset) - With this method, we can do anything we want for updating objects
+
+      request - represents the current HTTP request
+
+      queryset - contains the objects the user has selected
+
+ self.message_user - Every ModelAdmin contains this method for showing a message to the user. Has two arguments, the first is `request`, second is the message you want to show to the user.
+
+from django.contrib import messages - Use this to modify the type of messages you display to the user. It is passed as the third argument in the self.message_user
+
+
+
 
 
 
