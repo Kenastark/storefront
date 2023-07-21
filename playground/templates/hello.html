@@ -2,37 +2,27 @@
     <body>
         
         {% if name %}
-        <h1> Bonjour monsieur {{name}}</h1>
+        <h1> Holla! {{name}}</h1>
         {% else%}
         <h1>Hello world</h1>
         {% endif %}
-        
-        <h4> for products   </h4>
-        <ul>
-            {% for product in products %}
-            <li>
-                {{ product.title }}
-            </li>
-            {% endfor %}
-        </ul>
 
-        <h4>For customers</h4>
-        <ul>
-            {% for customer in customers %}
-            <li>
-                {{ customer.email }}
-            </li>
-            {% endfor %}
-        </ul>
+        {{result}}
+        <p> <b>1. How many orders do we have?</b> </p>
 
-        <h4>For orders</h4>
+            {{result1}}
+        <br>
 
-        <ul>
-            {% for order in orders %}
-            <li>
-                {{ order.id }}
-            </li>
-            {% endfor %}
+        <p><b> 2.How many units of product 1 have we sold?</b> </p>
+      
+            {{result2}}
+        <br>
+        <p><b> 3. How many orders has customer 1 placed?</b></p>
+            {{result3}}
+        <br>
+       <p><b>4. What is the min, max and average price of the products in collection 3? </b>  </p> 
+       <br>
+            {{result4}}
         </ul>
     </body>
 </html>

@@ -108,7 +108,7 @@ on_delete=models.PROTECT - To prevent deletion. If child is present, parent cann
 Use customer = models.ForeignKey(<class-name>, on_delete=models.PROTECT) to define a one to many relation. With the <class-name> referencing the Parent class(Primary Key)
 
 9 - Defining a Many-to-Many relationship
-We can define the relationship in either of these classes and Django automatically create the reverse relationship.
+We can define the relationship in either of these classes and Django automatically create the relationship.
 
 We define the relationship in the Product class because we might have a product we are showing to the user and at the same time, we want to show all the promotions that apply to that product. Django automatically create the reverse relationship 
       promotions = models.ManyToManyField(Promotion, related_name='products')
@@ -366,6 +366,384 @@ you can use | , & , ~(not) operators with the Q
 Using the F class, you can reference a particular field
 
 Using F objects, you can also reference a field in a related table
+
+
+9 - Sorting
+
+      Product.objects.order_by('title') is used to sort a result by one or more fields
+      Product.objects.order_by('-title') - adding  `-` before the field does a descending sort
+
+.orber_by() returns a queryset
+adding a .reverse() method at the end of the above, it will reverse the direction of the sort.
+
+you can add order_by() after filtering because filter() returns a querset object and order_by() is a method of a queryset object.
+
+.earliest('unit_price) is used to return the first object after it sorts. It returns an object
+.latest() - sorts in descending order and returns the first object
+
+10 - Limiting Results
+
+to limit the results returned, use python Array slicing syntax [:5]
+
+[5:10] -  will return the next five products on the second page (assuming your page size is 5)
+
+
+
+11 - Selecting Related Objects
+
+
+
+Use .value() to related selected fields 
+
+NOTE: Use double underscore (__) to access related fields
+
+.values method() returns a dictionary object
+
+.values_list returns a tuple, not a dictionary
+
+.distinct() - is used to remove duplicates
+
+
+12 - Deferring Fields 
+
+
+.only() method used to specfiy the fields you want to read from the database
+
+.only() u get instances of the class, while with .values() you get dictionary objects
+
+NOTE: Be careful when using the .only() or else you end up with a lot of extra unnecessary queries. This problem does not happen with .value() because dictionary do not issue a query to the database for objects that don't exist
+
+
+.defer() -  is used to defer the loading of certain fields to later
+
+
+13 - Selecting Related objects
+
+.select_related(), django creates a join between our tables
+
+we can also span relationships using double underscores (__) eg select_related()
+
+We use select_related when the other end of the relationship has one instance eg A product has one collection.
+
+prefetch_related is used when the other end of the relationship has many objects. It creates two sets( of queries). Django reads these sets and then populate our objects in memory
+
+
+both select_related & prefetch_related returns queryset object. Order of arrangement does not matter.
+
+NOTE: use double underscores to select target fields 
+
+
+14 - Aggregating Objects  
+
+.aggregate is used to compute summaries
+
+
+.aggregate is one of the methods of QuerySet. So you can apply it whenever you have a queryset. For example, you can filter() first, then apply the aggregate method
+
+
+15 - Annotating Objects
+
+you cannot pass boolean values in the .annotate() method. You need to pass an expression object.
+
+The Expression class in django is the base class of all types of expression. The derivates of this class are:
+
+1. Values - for representing simple values like number, boolean, string
+
+2. F - used to referencing a feild in the same or another table. It is an expression object.
+
+3. Func - for calling database functions used for manipulating data.
+
+4. Aggregate class - is the base class for all aggregate classes like Count, Sum
+
+
+16 -  Calling Database function
+
+.Func() is used to call database functions
+
+function='CONCAT' - This is an example of a keyword argument that is used to call the name of the target function
+
+Django Database Functions
+https://docs.djangoproject.com/en/4.2/ref/models/database-functions/
+
+17 - Grouping Data
+
+
+18 - Working With Expression Wrappers
+
+The Expression class is the base clase of all types of expressions
+
+Expression wrapper is used when building complex expressions
+
+
+19 - Querying Generic Relationships
+
+ContentType is a model, therefore it has the objects attribute
+
+.get_for_model() method is a special method only available in the objects manager
+
+The objects attribute returns a manager object which is a gateway to the database. ContentType manager has a special method called .get_for_model()
+
+content_type represents an instance i.e a row in the table
+
+
+20 - Custom Managers
+
+.Manager class is the base class for all Managers
+
+NOTE:using the self parameter in a method makes it become a method of the class it is defined under.
+
+You need to include your newly defined custom Manager in the Class in the created it for by adding a new attribute and set it to an instance of the defined custom manager class you created
+
+21 - Understanding QuerySet Cache
+
+Reading data from disk is expensive and it is always slower than reading from memory
+
+Caching happens only if we evaluate the entire queryset first
+
+22 - Creating objects
+
+In RDBMS, the parent record must exist before you create the child record
+
+                  collection.featured_product = Product(pk=1) #first method
+   #or
+                  collection.featured_product_id = 1 #second method
+
+You can set the fields using keyword arguments while creating the Collection object. There are problems with this approach:
+      1. No IntelliSense
+      2. Keyword arguments don't get updated when you rename a field
+
+use .save() method to insert the collection into your database. If no id is selected, Django will treat it as an insert operation.
+
+
+            collection = Collection.objects.create(name='a', featured_product_id=1)
+
+the create() method above will create a collection object and initialize this object based on the keyword argument and then it will call the save() method to insert this collection in the database.
+
+23 - Updating Objects
+
+Lets say you want to only update the featured_product not including the 'title'. Django will set the title = " " (empty string) which causes data loss. The reason for this is that the collection object in memory has collection.title = ' ' by default
+
+
+Django does not have change tracking.
+
+To properly update an object in Django applications, first we have to read it from the database so we have all the values in memory, then we can update it
+
+Use Collection.objects.filter(pk=14).update(featured_product=None) to avoid reading a collection first before updating it. You can update it directly in the database
+
+24 - Deleting objects
+
+collection.delete() - used to delete the entire collection
+
+
+   Collection.objects.filter(id__gt=10).delete() - To delete a specific records
+
+
+
+   25 - Transactions
+
+In RDBMS, you must always create the parent record first before you.
+
+Transactions help create multiple changes to a database in an atomic way, meaning all changes should be saved together. If one of the changes fails, then all changes should be rolled back.
+
+
+Use Transactions to prevent your DB from being in an inconsistent state.
+
+            from django.db import transaction
+
+@transaction.atomic() function can be used as a decorator or a context manager to a function and it will wrap the entire function inside the transaction.
+
+
+26 - Exceuting Raw SQL queries
+
+Django ORM helps us in writing and executing SQL queries without neccessarily writng SQL code
+
+Product.objects.raw() - Every manager has the .raw() method for executing raw SQL queries
+
+Use this approach when:
+1. Dealing iwth complex queries
+2. If the query that Django generates does not perform well
+
+In situations were you need ot execute queries that do not map to our model objects. In those cases, you can access the database directly and bypass the model layer. Use Cursor()
+
+After running your queries with cursor(), always close the cursor using cursor.close() to release the allocated resources.
+
+The proper way to use a cursor is to wrap the cursor inside a TRY FINAL block. Inside the FINAL block, we close the cursor so if something goes wrong, we do not end up with an open cursor.
+
+Using a cursor with a WITH statement is much easier
+
+            with connection.cursor() as cursor:
+      returns a cursor object. The cursor is explicitly closed with this method
+
+cursor.callproc() method is used for executing stored procedures. It is better than wrting SQL in the middle of your python code.
+
+You write your SQL code inside  a stored procedure and call it in Python
+
+
+
+
+THE ADMIN SITE 
+
+
+2 - Setting Up the Admin Site 
+
+Run 'python manage.py createsuperuser' to create a new user
+
+The Admin app is depended on the Session App
+
+So you have to Add the sessions app in the list of INSTALLED_APPS
+
+Then run 'python manage.py migrate' to generate the tables for this app
+
+Run 'python manage.py changepassword admin' 
+
+
+Use the code below to customize some interfact on the Admin site. Write in the urls.py module under your project folder
+            admin.site.site_header = 'Storefront Admin'
+            admin.site.index_title = 'Admin'
+
+
+3 - Registering Models 
+
+Every django app has a admin.py module where you customize the administration panel for that app.
+
+admin.site.register(models.Collection) - Is used to register the Collection Model under the admin.py module.
+
+To change the string representation of an object in python, we override the magic stir method (__str__):
+            def __str__(self) -> str:
+                   return self.title
+
+
+Use metaclass to define the default ordering of collection object.
+
+Model Meta is basically the inner class of your model class. Model Meta is basically used to change the behavior of your model fields like changing order options,verbose_name, and a lot of other options.
+
+
+4 - Customizing the List page
+
+By convention, use the name of your model followed by the word "Admin" (eg ProductAdmin) to create a new class under admin.py in your app. With this class, you can specfiy how you want to edit or view your Products. 
+
+You will need to pass it while registering the product model. We do this using the registered decorator.
+
+            @admin.register(models.Product)
+
+
+The above code replaces this code -> admin.site.register(models.Product)
+
+list_display = ['title', 'unit_price'] - To display the listed columns
+list_editable = ['unit_price'] - To make the listed field editable
+list_per_page = 10 - To set the no. of enteries per page
+
+Google Django ModelAdmin to see the list of options we can set 
+
+PS: you can set the ordering = ['field_name'] in the class Meta: under the model definition or under the `class CustomerAdmin(admin.ModelAdmin):` in the admin.py module
+
+
+5 - Adding Computed columns
+
+@admin.display(ordering='inventory') decorator is used to add sorting to a calculated column
+
+Use a defined function def `inventory_status(self, product):` to return a calculated column
+
+6 - Selecting Related Objects 
+
+Use queryset.select_related for loading or preloading related fields
+
+list_select_related = ['collection] - Does similar work to the queryset code above. It is used to load related objects on the list page
+
+`return f'{self.first_name} {self.last_name}'` -  This combines first and last_name
+
+
+7 - Overriding the Base QuerySet
+
+
+To override the base queryset used in rendering a list page
+
+Every ModelAdmin has a get_queryset() method which we can override
+
+NOTE: use cmd + . to import unimported modules at the top
+
+Use methods to add calculated columns
+
+Use @admin.display(ordering='fieldname') to sort a calculated column
+
+
+8 - Providing Links to other Pages 
+
+To generate an HTML link, we import a utility function  `django.utils.html import format_html`
+ return format_html('<a href="http://google.com>{}</a>', collection.products_count) - this is how you use the format_html function.
+
+format_html - To generate a HTML link
+
+the reverse() function is used to generate the URL of a page
+
+reverse('admin:appname_nameOfModel_pageName') - this is how you use the reverse function admin:App name_ Model Name_ page you want
+
+To apply a filter, you will need to append a querystring to the URL
+
+`django.utils.html import urlencode` - To generate the querstring parameters, we use 
+
+urlencode is used to generate the querstring parameters
+
+A querystrong can contain multiple key-value pairs so we use a dictionary within the urlencode() function
+
+TRYING TO DO THE EXERCISE
+--- I kinda succeeded but not there yet 
+
+search_fields = ['first_name__istartswith', 'last_name__istartswith'] - To add a searchbar. The __istartswith are lookup types
+
+9 - Adding Search to the List Page
+search_fields = ['first_name__istartswith', 'last_name__istartswith'] - to add the search bar
+
+10 - Adding Filtering to the List Page 
+
+You define a class to create your custom filter
+            class InventoryFilter(admin.SimpleListFilter):
+
+list_filter = ['collection', 'last_update']
+
+
+
+parameter_name = 'inventory' - Will be used in the querystring 
+
+def lookups(self, request, model_admin):
+        return - Used to specify what items wil appear beneath the title = 'inventory'
+         - This returns a list of tuples, each tuple represents one of the filter
+
+Each tuple should have two values
+- the first value is the value you use for filtering
+- the second is a human readable description
+
+def queryset(self, request, queryset):
+        return  - Is where you implement the filtering logic
+
+To use your custom filter, you add it to the list_filter options `list_filter = ['collection', 'last_update', InventoryFilter]`
+
+
+11 - Creating Custom Actions
+
+Every list page comes with a Delete Action for deleting multiple items in one go. You can extend this list and register your own custom action
+
+
+Define a method to create custom actions
+
+      @admin.action(description='Clear inventory')
+      def clear_inventory(self, request, queryset) - With this method, we can do anything we want for updating objects
+
+      request - represents the current HTTP request
+
+      queryset - contains the objects the user has selected
+
+ self.message_user - Every ModelAdmin contains this method for showing a message to the user. Has two arguments, the first is `request`, second is the message you want to show to the user.
+
+from django.contrib import messages - Use this to modify the type of messages you display to the user. It is passed as the third argument in the self.message_user
+
+
+
+
+
+
+
+
 
 
 
