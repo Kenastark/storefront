@@ -738,6 +738,22 @@ Define a method to create custom actions
 from django.contrib import messages - Use this to modify the type of messages you display to the user. It is passed as the third argument in the self.message_user
 
 
+12 - Customizing Forms
+
+execute - ['title', 'slug']
+
+execute is the opposite of fields attribute
+
+readonly_fields = ['title'] - does what it is named as
+
+
+the prepopulated fields only gets pre populated only if we have not touched it
+
+
+Google "Django ModelAdmin" to find all the options available for customizing a form
+
+
+13 - Adding Data Validation 
 
 
 
