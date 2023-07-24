@@ -771,6 +771,23 @@ Code above used to set the MinValueValidator
 
 14 - Editing Children Using Inlines 
 
+Use Inlines to edit children models on the admin panel
+
+class OrderItemInline(admin.TabularInline) - Display the edit panel as a table
+
+
+class OrderItemInline(admin.StackedInline) - Display the edit panel elements stacked one above the other
+
+
+extra = 0  - Use the set the number of OrderItem Inline rows to zero
+
+min_num = 3 - Minimum number of rows to display on the edit panel
+max_num = 10 - Maximum number of rows to display on the edit panel
+
+
+
+
+
 
 
 
