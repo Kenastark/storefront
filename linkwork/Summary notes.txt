@@ -755,13 +755,21 @@ Google "Django ModelAdmin" to find all the options available for customizing a f
 
 13 - Adding Data Validation 
 
+null=True only applies in the database
+
+description = models.TextField(null=True, blank=True) - Use blank to make it optional in the admin interface
+
+Google "django validators' to see a list of django validators
+
+                  unit_price = models.DecimalField(
+                        max_digits=6, 
+                        decimal_places=2,
+                        validators=[MinValueValidator(1)])
+                  inventory = models.IntegerField(validators=[(MinValueValidator(1))])
+Code above used to set the MinValueValidator
 
 
-
-
-
-
-
+14 - Editing Children Using Inlines 
 
 
 
