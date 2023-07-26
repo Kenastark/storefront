@@ -786,7 +786,9 @@ max_num = 10 - Maximum number of rows to display on the edit panel
 
 
 
+15 - Using Generic Relations
 
+To see the label of each tag item, you need to override the str method in the Tag class
 
 
 
