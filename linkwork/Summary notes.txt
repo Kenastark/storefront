@@ -791,6 +791,23 @@ max_num = 10 - Maximum number of rows to display on the edit panel
 To see the label of each tag item, you need to override the str method in the Tag class
 
 
+16 - Extending Pluggable Apps 
+
+Apps are supposed to be deployed independently of each other. To do that, we deploy a new app called `store_custom` which will know about both the store app and the tag app.
+
+            python manage.py startapp store_custom
+      This will create the above new app
+
+We will go to the admin module to combine features from the two pluggable apps (store and tags app)
+
+YOu need to create a new ProductAdmin which will extend the generic ProductAdmin that comes with the reusable app.
+
+You need to now unregister the old ProductAdmin and register the new one.
+
+                  admin.site.unregister(Product)
+                  admin.site.register(Product, CustomProductAdmin)
+
+            cmd + T - Use to quickly jump across files
 
 
-
+17 - What's Next 
