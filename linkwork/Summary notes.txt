@@ -811,3 +811,9 @@ You need to now unregister the old ProductAdmin and register the new one.
 
 
 17 - What's Next 
+
+Learn REST APIs 
+Authentication and authorizaton
+Logging
+Caching
+
