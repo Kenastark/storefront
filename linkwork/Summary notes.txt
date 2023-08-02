@@ -738,16 +738,85 @@ Define a method to create custom actions
 from django.contrib import messages - Use this to modify the type of messages you display to the user. It is passed as the third argument in the self.message_user
 
 
+12 - Customizing Forms
+
+execute - ['title', 'slug']
+
+execute is the opposite of fields attribute
+
+readonly_fields = ['title'] - does what it is named as
+
+
+the prepopulated fields only gets pre populated only if we have not touched it
+
+
+Google "Django ModelAdmin" to find all the options available for customizing a form
+
+
+13 - Adding Data Validation 
+
+null=True only applies in the database
+
+description = models.TextField(null=True, blank=True) - Use blank to make it optional in the admin interface
+
+Google "django validators' to see a list of django validators
+
+                  unit_price = models.DecimalField(
+                        max_digits=6, 
+                        decimal_places=2,
+                        validators=[MinValueValidator(1)])
+                  inventory = models.IntegerField(validators=[(MinValueValidator(1))])
+Code above used to set the MinValueValidator
+
+
+14 - Editing Children Using Inlines 
+
+Use Inlines to edit children models on the admin panel
+
+class OrderItemInline(admin.TabularInline) - Display the edit panel as a table
+
+
+class OrderItemInline(admin.StackedInline) - Display the edit panel elements stacked one above the other
+
+
+extra = 0  - Use the set the number of OrderItem Inline rows to zero
+
+min_num = 3 - Minimum number of rows to display on the edit panel
+max_num = 10 - Maximum number of rows to display on the edit panel
 
 
 
+15 - Using Generic Relations
+
+To see the label of each tag item, you need to override the str method in the Tag class
 
 
+16 - Extending Pluggable Apps 
+
+Apps are supposed to be deployed independently of each other. To do that, we deploy a new app called `store_custom` which will know about both the store app and the tag app.
+
+            python manage.py startapp store_custom
+      This will create the above new app
+
+We will go to the admin module to combine features from the two pluggable apps (store and tags app)
+
+YOu need to create a new ProductAdmin which will extend the generic ProductAdmin that comes with the reusable app.
+
+You need to now unregister the old ProductAdmin and register the new one.
+
+                  admin.site.unregister(Product)
+                  admin.site.register(Product, CustomProductAdmin)
+
+            cmd + T - Use to quickly jump across files
 
 
+17 - What's Next 
 
+Learn REST APIs 
+Authentication and authorizaton
+Logging
+Caching
 
-
-
+18 - The Ultimate Django- Part 2
 
 
